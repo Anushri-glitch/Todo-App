@@ -47,18 +47,19 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
+<!--		DataBase H2 Dependency ...-->
+		<dependency>  <!-- 1 -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<dependency>
+		<dependency>   <!-- 2 -->
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
+		<dependency>  <!-- 3 -->
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.0.Final</version>

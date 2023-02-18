@@ -13,14 +13,14 @@ public class TodoService implements ITodoService{
 
     private static int todoCount = 0;
 
-    static {
-        /* new Todo - means call cons. of Todo.java class */
-        todos.add(new Todo(++todoCount,"Learn Spring Boot",false));
-        todos.add(new Todo(++todoCount,"Visit Grocery Store",false));
-        todos.add(new Todo(++todoCount,"Learn AWS",false));
-        todos.add(new Todo(++todoCount,"Swimming",false));
-        todos.add(new Todo(++todoCount,"Yoga",false));
-    }
+//    static {
+//        /* new Todo - means call cons. of Todo.java class */
+//        todos.add(new Todo(++todoCount,"Learn Spring Boot",false));
+//        todos.add(new Todo(++todoCount,"Visit Grocery Store",false));
+//        todos.add(new Todo(++todoCount,"Learn AWS",false));
+//        todos.add(new Todo(++todoCount,"Swimming",false));
+//        todos.add(new Todo(++todoCount,"Yoga",false));
+//    }
 
     public List<Todo> findAll() {
         return todos;
