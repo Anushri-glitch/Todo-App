@@ -2,7 +2,10 @@ package com.example.todo.controller;
 
 import com.example.todo.model.Todo;
 import com.example.todo.service.ITodoService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,12 +40,14 @@ public class TodoController {
 
     //TODO APP - CREATE/FETCH/UPDATE/DELETE
 
-    @Autowired    //Used to Inject Dependency
-    //ITodoService is an Interface for  Service class
-    /* we make todoService class variable in Controller class for accept list*/
-    private ITodoService todoService;
 
-    /* 1. we dont use default constructor when we use Autowired annotation
+     /*1. Used to Inject Dependency
+       2. ITodoService is an Interface for  Service class
+       3. we make todoService class variable in Controller class for accept list */
+     @Autowired
+     ITodoService todoService;
+
+    /* 1. we don't use default constructor when we use Autowired annotation
     public TodoController(TodoService todoService){
         this.todoService = todoService;
     }*/
@@ -57,16 +62,6 @@ public class TodoController {
        8. hit on search button and see which new Json data we add recently it is showing in our self maked Rest Api Json Data's List
        9. So By this function we create our new Json data and add in the List
      */
-    @PostMapping("/add-todo")
-    public void addTodo(@RequestBody Todo todo){
-        todoService.addTodo(todo);
-    }
-
-    /* In this method we print Todos By Id...*/
-    @GetMapping
-    public Todo findTodoById(@PathVariable int id){
-    return null;
-    }
 
     //We Done Read Operation In this Part
     //http://localhost:8080/api/v1/todo-app/find-all - we run this api on browser to get api output
@@ -75,12 +70,24 @@ public class TodoController {
         return todoService.findAll(); //Controller is talking to service layer
 
     }
+    @PostMapping("/add-todo")
+    public void addTodo(@RequestBody Todo todo){
+        todoService.addTodo(todo);
+    }
 
+    /* In this method we print Todos By Id...*/
+    @GetMapping("findById/id/{Id}")
+    public Todo findTodoById(@PathVariable int id){
+       return todoService.findById(id);
+    }
 
     //@RequestMapping(value="url",method=HttpRequest.PUT)
     @PutMapping("update-todo/id/{id}")
-    public void updateTodo(@PathVariable int id, @RequestBody Todo todo){
-        todoService.updateTodo(id,todo);
+    public ResponseEntity<String> updateTodo(@PathVariable int id, @RequestBody String todoRequest){
+        Todo todo = setTodo(todoRequest);
+        todoService.updateTodo(id, todo);
+        return new ResponseEntity("todo updated", HttpStatus.OK);
+
     }
 
     /* 1. We Done Deletion in this part
@@ -98,7 +105,16 @@ public class TodoController {
         todoService.deleteTodo(id);
     }
 
+    private Todo setTodo(String todoData){
+        JSONObject jsonObject = new JSONObject(todoData);
+        Todo todo = new Todo();
 
+        todo.setId(jsonObject.getInt("id"));
+        todo.setTitle(jsonObject.getString("title"));
+        todo.setStatus(jsonObject.getBoolean("status"));
+
+        return todo;
+    }
 
 
 }
