@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table
 public class Todo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-
     private int id;
     //@Column(name="Todo_title")
     private String title;

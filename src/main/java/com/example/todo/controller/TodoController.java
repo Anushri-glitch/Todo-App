@@ -1,8 +1,7 @@
 package com.example.todo.controller;
 
 import com.example.todo.model.Todo;
-import com.example.todo.service.ITodoService;
-import org.json.JSONObject;
+import com.example.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +44,7 @@ public class TodoController {
        2. ITodoService is an Interface for  Service class
        3. we make todoService class variable in Controller class for accept list */
      @Autowired
-     ITodoService todoService;
+     TodoService todoService;
 
     /* 1. we don't use default constructor when we use Autowired annotation
     public TodoController(TodoService todoService){
@@ -71,21 +70,21 @@ public class TodoController {
 
     }
     @PostMapping("/add-todo")
-    public void addTodo(@RequestBody Todo todo){
-        todoService.addTodo(todo);
+    public String addTodo(@RequestBody Todo todo){
+        return todoService.addTodo(todo);
     }
 
     /* In this method we print Todos By Id...*/
-    @GetMapping("findById/id/{Id}")
-    public Todo findTodoById(@PathVariable int id){
-       return todoService.findById(id);
+    @GetMapping("findById/todoId/{todoId}")
+    public Todo findTodoById(@PathVariable Integer todoId){
+       return todoService.findById(todoId);
     }
 
     //@RequestMapping(value="url",method=HttpRequest.PUT)
-    @PutMapping("update-todo/id/{id}")
-    public ResponseEntity<String> updateTodo(@PathVariable int id, @RequestBody String todoRequest){
-        Todo todo = setTodo(todoRequest);
-        todoService.updateTodo(id, todo);
+    @PutMapping("update-todo/todoId/{todoId}")
+    public ResponseEntity<String> updateTodo(@PathVariable Integer todoId, @RequestBody Todo todoRequest){
+        //Todo todo = setTodo(todoRequest);
+        todoService.updateTodo(todoId, todoRequest);
         return new ResponseEntity("todo updated", HttpStatus.OK);
 
     }
@@ -100,21 +99,21 @@ public class TodoController {
        8. For checking that Json data will be deleted or not call this Api -
           localhost:8080/api/v1/todo-app/find-all
      */
-    @DeleteMapping("delete-todo/id/{id}")
-    public void deleteTodo(@PathVariable int id){
-        todoService.deleteTodo(id);
+    @DeleteMapping("delete-todo/todoId/{todoId}")
+    public void deleteTodo(@PathVariable Integer todoId){
+        todoService.deleteTodo(todoId);
     }
 
-    private Todo setTodo(String todoData){
-        JSONObject jsonObject = new JSONObject(todoData);
-        Todo todo = new Todo();
-
-        todo.setId(jsonObject.getInt("id"));
-        todo.setTitle(jsonObject.getString("title"));
-        todo.setStatus(jsonObject.getBoolean("status"));
-
-        return todo;
-    }
+//    private Todo setTodo(String todoData){
+//        JSONObject jsonObject = new JSONObject(todoData);
+//        Todo todo = new Todo();
+//
+//        todo.setId(jsonObject.getInt("id"));
+//        todo.setTitle(jsonObject.getString("title"));
+//        todo.setStatus(jsonObject.getBoolean("status"));
+//
+//        return todo;
+//    }
 
 
 }
