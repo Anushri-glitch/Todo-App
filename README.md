@@ -117,19 +117,12 @@ public interface ITodoRepository extends JpaRepository<Todo,Integer> {
 ### :o: Todo Response
 
 ![Screenshot (813)](https://github.com/Anushri-glitch/Todo-App/assets/47708011/d861f3ab-5252-4fe9-999a-adcd32edbab3)
-
 ![Screenshot (814)](https://github.com/Anushri-glitch/Todo-App/assets/47708011/c2a2dac8-1dba-422d-8ab4-f4cd8ca453b8)
-
 ![Screenshot (818)](https://github.com/Anushri-glitch/Todo-App/assets/47708011/6ec25a4b-f231-41f6-911d-acfe86976779)
-
 ![Screenshot (815)](https://github.com/Anushri-glitch/Todo-App/assets/47708011/41760f8d-7af1-41ab-b098-f40ab35515b8)
-
 ![Screenshot (816)](https://github.com/Anushri-glitch/Todo-App/assets/47708011/76f04433-e533-4c7e-9b5a-5fd11269d50a)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
